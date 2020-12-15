@@ -20,14 +20,20 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="validateEmail">邮箱地址</label>
-        <validate-input :rules="emailRules" :id="validateEmail"></validate-input>
+        <validate-input 
+          :rules="emailRules" 
+          :id="validateEmail"
+          v-model="eRef"
+        >
+        </validate-input>
+        {{eRef}}
       </div>
-    </form>
+    </fm>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent,reactive } from 'vue'
+import { defineComponent,reactive,ref } from 'vue'
 import "bootstrap/dist/css/bootstrap.min.css";
 import ColumnList,{ColumnProps} from './components/ColumnList.vue';
 import GlobalHeader,{UserProps} from './components/GlobalHeader.vue';
@@ -92,12 +98,14 @@ export default defineComponent({
       {type: 'required', message:'email can not be empty'},
       {type: 'email', message:'email should be valid format'},
     ]
+    const eRef = ref('donnchao@outlook.com');
     return {
       list: testData,
       currentUser: currentUser,
       emailRef,
       validateEmail,
-      emailRules
+      emailRules,
+      eRef
     }
   }
 })
