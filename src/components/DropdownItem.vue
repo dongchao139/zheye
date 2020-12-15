@@ -23,7 +23,7 @@ export default defineComponent({
     pointer-events: none;
     background-color: transparent;
   }
-  .dropdown-option.is-disabled > a.dropdown-item{
+  .dropdown-option.is-disabled > a.dropdown-item {
     color: #6c757d;
   }
 </style>

@@ -1,8 +1,7 @@
 <template>
   <div class="dropdown" ref="dropdownRef">
     <a
-      class="btn btn-outline-light my-2 dropdown-toggle"
-      href="#"
+      class="btn btn-outline-light my-2 dropdown-toggle" href="#"
       @click.prevent="toggleOpen"
       >{{ title }}</a
     >
