@@ -2,7 +2,8 @@
   <div class="container">
     <global-header :user="currentUser"></global-header>
     <!-- <column-list :list="list"></column-list> -->
-    <form action="">
+    <hr />
+    <validate-form action="" @form-submit="onSubmitForm">
       <div class="mb-3">
         <label for="exampleInputEmail" class="form-label">邮箱地址</label>
         <input type="email" class="form-control"
@@ -28,7 +29,7 @@
         <label class="form-label" for="validateEmail">邮箱地址</label>
         <validate-input 
           :rules="emailRules" 
-          id="'validateEmail'"
+          id="validateEmail"
           v-model="eRef"
           type="email"
           placeholder="清输入邮箱"
@@ -36,7 +37,10 @@
         </validate-input>
         {{eRef}}
       </div>
-    </form>
+      <template #submit>
+        <span class="btn btn-danger">Submit</span>
+      </template>
+    </validate-form>
   </div>
 </template>
 
@@ -46,6 +50,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ColumnList,{ColumnProps} from './components/ColumnList.vue';
 import GlobalHeader,{UserProps} from './components/GlobalHeader.vue';
 import ValidateInput,{RulesProp} from './components/forms/ValidateInput.vue';
+import ValidateForm from "./components/forms/ValidateForm.vue";
 const currentUser: UserProps = {
   isLogin: true,
   name: 'Viking-Ship'
@@ -83,6 +88,7 @@ export default defineComponent({
     // ColumnList,
     GlobalHeader,
     ValidateInput,
+    ValidateForm,
   },
   setup(){
     const emailRef = reactive({
@@ -107,13 +113,17 @@ export default defineComponent({
       {type: 'email', message:'email should be valid format'},
     ]
     const eRef = ref('donnchao@outlook.com');
+    const onSubmitForm = (result: boolean) => {
+      console.log(result);
+    }
     return {
       list: testData,
       currentUser: currentUser,
       emailRef,
       validateEmail,
       emailRules,
-      eRef
+      eRef,
+      onSubmitForm
     }
   }
 })
