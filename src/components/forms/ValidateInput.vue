@@ -1,11 +1,9 @@
 <template>
   <div>
     <input
-      type="text"
+      type="text" class="form-control" id="id"
       :value="inputRef.val"
-      class="form-control"
       @blur="validateInput"
-      id="id"
       @input="updateValue"
       :class="{ 'is-valid': !inputRef.error,'is-invalid':inputRef.error }"
     />
@@ -34,6 +32,9 @@ export default defineComponent({
       error: false,
       message: "",
     });
+    // 自定义组件中，Vue3使用modelValue属性和update:modelValue事件实现v-model功能
+    // vue2的自定义组件中，input[type=text]使用的是:value属性@input事件
+      // input[type=checkbox]使用的是:checked属性和@change事件
     const updateValue = (event: KeyboardEvent) => {
       const targetValue = (event.target as HTMLInputElement).value;
       inputRef.val = targetValue;

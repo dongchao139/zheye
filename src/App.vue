@@ -22,13 +22,13 @@
         <label class="form-label" for="validateEmail">邮箱地址</label>
         <validate-input 
           :rules="emailRules" 
-          :id="validateEmail"
+          :id="'validateEmail'"
           v-model="eRef"
         >
         </validate-input>
         {{eRef}}
       </div>
-    </fm>
+    </form>
   </div>
 </template>
 
