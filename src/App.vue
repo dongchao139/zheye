@@ -16,14 +16,22 @@
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword" class="form-label">密码</label>
-        <input type="password" class="form-control" id="exampleInputPassword">
+        <validate-input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword"
+            placeholder="清输入密码"
+        >
+        </validate-input>
       </div>
       <div class="mb-3">
         <label class="form-label" for="validateEmail">邮箱地址</label>
         <validate-input 
           :rules="emailRules" 
-          :id="'validateEmail'"
+          id="'validateEmail'"
           v-model="eRef"
+          type="email"
+          placeholder="清输入邮箱"
         >
         </validate-input>
         {{eRef}}

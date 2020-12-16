@@ -1,10 +1,11 @@
 <template>
   <div>
     <input
-      type="text" class="form-control" id="id"
+      class="form-control"
       :value="inputRef.val"
       @blur="validateInput"
       @input="updateValue"
+      v-bind="$attrs"
       :class="{ 'is-valid': !inputRef.error,'is-invalid':inputRef.error }"
     />
     <span v-if="inputRef.error" class="invalid-feedback">
@@ -23,9 +24,11 @@ export type RulesProp = RuleProp[];
 export default defineComponent({
   props: {
     rules: Array as PropType<RulesProp>,
-    id: String,
     modelValue: String
   },
+  // 禁用根元素继承attribute.
+  inheritAttrs: false,
+  // 在模板中的input中添加v-bind="$attrs", 将组件的attributes绑定到input中
   setup(props,context) {
     const inputRef = reactive({
       val: props.modelValue || "",
