@@ -59,9 +59,9 @@ export default defineComponent({
           return passed;
         });
         inputRef.error = !valid;
-        return valid;
+        return {valid, name: context.attrs.name};
       }
-      return true;
+      return {valid:true, name: context.attrs.name};
     };
     // 使用全局的emitter对象, 在子组件中初始化时发布事件.
     // 在父组件中监听此事件, 在监听事件拿到子组件的validate函数
@@ -69,7 +69,7 @@ export default defineComponent({
       // 使用随机的formName,区分不同的form实例
       // 并通过provide->inject在子组件中获得此formName
       emitter.emit('form-item-created', {
-        value: inputRef.val,
+        value: validateInput,
         formName: inject('formName')
       });
     })

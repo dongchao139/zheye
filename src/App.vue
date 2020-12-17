@@ -19,6 +19,7 @@
         <label for="exampleInputPassword" class="form-label">密码</label>
         <validate-input
             type="password"
+            name="password"
             class="form-control"
             id="exampleInputPassword"
             placeholder="清输入密码"
@@ -30,6 +31,7 @@
         <validate-input
           id="validateEmail"
           type="email"
+          name="email"
           placeholder="清输入邮箱"
           :rules="emailRules"
           v-model="eRef"
@@ -116,8 +118,8 @@ export default defineComponent({
     const eRef = ref('donnchao@outlook.com');
     const inputRef = ref<any>();
     const onSubmitForm = (result: boolean) => {
-      // console.log(result);
-      console.log(inputRef.value.validateInput());
+      console.log(result);
+      // console.log(inputRef.value.validateInput());
     }
     return {
       list: testData,
