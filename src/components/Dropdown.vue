@@ -31,10 +31,13 @@ export default defineComponent({
     };
     const dropdownRef = ref<null | HTMLElement>(null);
     const isClickedOutside = useClickOutside(dropdownRef);
-    watch(isClickedOutside, () => {
+    // 作用类似于React的useEffect
+    // 回调函数的第三个参数是一个函数,用来注册清理操作
+    watch(isClickedOutside, (val,oldVal,onCleanUp) => {
       if (isOpen.value && isClickedOutside.value) {
         isOpen.value = false;
       }
+      // onCleanUp(...)
     })
     return {
       isOpen,

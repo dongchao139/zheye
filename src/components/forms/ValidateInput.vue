@@ -29,7 +29,7 @@ export default defineComponent({
   // 禁用根元素继承attribute.
   inheritAttrs: false,
   // 在模板中的input中添加v-bind="$attrs", 将组件的attributes绑定到input中
-  setup(props,context) {
+  setup(props, context) {
     const inputRef = reactive({
       val: props.modelValue || "",
       error: false,
