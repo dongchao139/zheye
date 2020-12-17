@@ -14,7 +14,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, PropType } from "vue";
+import { defineComponent, reactive, PropType,onMounted,inject } from "vue";
+import {emitter} from './ValidateForm.vue';
 const emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 interface RuleProp {
   type: "required" | "email";
@@ -58,8 +59,20 @@ export default defineComponent({
           return passed;
         });
         inputRef.error = !valid;
+        return valid;
       }
+      return true;
     };
+    // 使用全局的emitter对象, 在子组件中初始化时发布事件.
+    // 在父组件中监听此事件, 在监听事件拿到子组件的validate函数
+    onMounted(() => {
+      // 使用随机的formName,区分不同的form实例
+      // 并通过provide->inject在子组件中获得此formName
+      emitter.emit('form-item-created', {
+        value: inputRef.val,
+        formName: inject('formName')
+      });
+    })
     return {
       inputRef,
       validateInput,

@@ -27,18 +27,19 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="validateEmail">邮箱地址</label>
-        <validate-input 
-          :rules="emailRules" 
+        <validate-input
           id="validateEmail"
-          v-model="eRef"
           type="email"
           placeholder="清输入邮箱"
+          :rules="emailRules"
+          v-model="eRef"
+          ref="inputRef"
         >
         </validate-input>
         {{eRef}}
       </div>
       <template #submit>
-        <span class="btn btn-danger">Submit</span>
+        <span class="btn btn-warning">Submit</span>
       </template>
     </validate-form>
   </div>
@@ -52,7 +53,7 @@ import GlobalHeader,{UserProps} from './components/GlobalHeader.vue';
 import ValidateInput,{RulesProp} from './components/forms/ValidateInput.vue';
 import ValidateForm from "./components/forms/ValidateForm.vue";
 const currentUser: UserProps = {
-  isLogin: true,
+  isLogin: false,
   name: 'Viking-Ship'
 }
 const testData: ColumnProps[] = [
@@ -113,8 +114,10 @@ export default defineComponent({
       {type: 'email', message:'email should be valid format'},
     ]
     const eRef = ref('donnchao@outlook.com');
+    const inputRef = ref<any>();
     const onSubmitForm = (result: boolean) => {
-      console.log(result);
+      // console.log(result);
+      console.log(inputRef.value.validateInput());
     }
     return {
       list: testData,
@@ -123,7 +126,8 @@ export default defineComponent({
       validateEmail,
       emailRules,
       eRef,
-      onSubmitForm
+      onSubmitForm,
+      inputRef
     }
   }
 })

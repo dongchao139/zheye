@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta1",
+    "mitt": "^2.1.0",
+    "uuid": "^8.3.2",
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
