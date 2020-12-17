@@ -23,8 +23,7 @@
             class="form-control"
             id="exampleInputPassword"
             placeholder="清输入密码"
-        >
-        </validate-input>
+        ></validate-input>
       </div>
       <div class="mb-3">
         <label class="form-label" for="validateEmail">邮箱地址</label>

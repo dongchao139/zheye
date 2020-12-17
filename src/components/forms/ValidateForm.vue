@@ -13,7 +13,7 @@ import {defineComponent,onUnmounted,provide} from 'vue';
 import {v4 as uuidv4} from 'uuid';
 import mitt from 'mitt';
 export const emitter = mitt();
-type ValidateFunc = () => {valid: boolean; name: string};
+type ValidateFunc = () => { valid: boolean; name: string; value: string };
 interface CallbackProps {
   formName: string;
   value: ValidateFunc;

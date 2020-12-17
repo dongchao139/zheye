@@ -59,9 +59,9 @@ export default defineComponent({
           return passed;
         });
         inputRef.error = !valid;
-        return {valid, name: context.attrs.name};
+        return {valid, name: context.attrs.name, value: inputRef.val};
       }
-      return {valid:true, name: context.attrs.name};
+      return {valid:true, name: context.attrs.name, value: inputRef.val};
     };
     // 使用全局的emitter对象, 在子组件中初始化时发布事件.
     // 在父组件中监听此事件, 在监听事件拿到子组件的validate函数
