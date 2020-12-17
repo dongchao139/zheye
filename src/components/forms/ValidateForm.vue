@@ -40,6 +40,7 @@ export default defineComponent({
     });
     const submitForm = () => {
       const result: Array<any> = [];
+      // 通过子组件的validate函数获取验证结果和输入的值
       funcArr.forEach(func => result.push(func()));
       context.emit('form-submit', result);
     };
