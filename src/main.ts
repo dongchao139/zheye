@@ -3,6 +3,7 @@ import {createRouter,createWebHistory} from 'vue-router'
 import App from './App.vue'
 import Home from "./views/Home.vue";
 import Login from "@/views/Login.vue";
+import ColumnDetail from "./views/ColumnDetail.vue";
 
 /**
  * SPA应用的优点
@@ -18,8 +19,16 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: Home },
     { path: '/login', name: 'login', component: Login },
+    { path: '/column/:id', name: 'column', component: ColumnDetail }
   ]
 });
+
+/**
+ * URL的结构
+ * 协议 + auth + host(hostname + port) + path(pathname + query) + hash
+ * https://user:password@sub.example.com:8080/p/a/t/h?query=string#hash
+ */
+
 const app = createApp(App);
 app.use(router);
 app.mount('#app')
