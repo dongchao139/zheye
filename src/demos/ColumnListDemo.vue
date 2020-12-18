@@ -5,12 +5,7 @@
 <script lang="ts">
 import { defineComponent,reactive,ref } from 'vue';
 import ColumnList,{ColumnProps} from '../components/ColumnList.vue';
-import {UserProps} from "@/components/GlobalHeader.vue";
 
-const currentUser: UserProps = {
-  isLogin: false,
-  name: 'Viking-Ship'
-}
 const testData: ColumnProps[] = [
   {
     id: 1,
@@ -45,8 +40,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      list: testData,
-      currentUser: currentUser
+      list: testData
     }
   }
 })
