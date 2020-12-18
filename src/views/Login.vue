@@ -13,7 +13,7 @@ export default defineComponent({
     // useRouter路由跳转
     const router = useRouter();
     const handleClick = function () {
-      router.push({name: 'column', params: {id: 3}})
+      router.push({name: 'column', params: {id: 3}, query: {a: 1}})
     };
     return {
       handleClick
