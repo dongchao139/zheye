@@ -10,6 +10,7 @@ import {useRouter} from 'vue-router'
 export default defineComponent({
   name: "Login",
   setup() {
+    // useRouter路由跳转
     const router = useRouter();
     const handleClick = function () {
       router.push({name: 'column', params: {id: 3}})

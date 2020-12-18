@@ -8,7 +8,7 @@ import {useRoute} from 'vue-router';
 export default defineComponent({
   name: "ColumnDetail",
   setup() {
-    /**
+/**
 {
   "path": "/column/1",
   "name": "column",
@@ -24,25 +24,13 @@ export default defineComponent({
     {
       "path": "/column/:id",
       "name": "column",
-      "meta": {},
-      "props": {
-        "default": false
-      },
       "children": [],
-      "instances": {},
-      "leaveGuards": {
-        "Set(0)": []
-      },
-      "updateGuards": {
-        "Set(0)": []
-      },
-      "enterCallbacks": {},
-      "components": {...}
+      ...
     }
   ],
   "meta": {}
-}}
-     */
+}} */
+    // useRoute获取路由信息
     const route = useRoute();
     return {
       route
