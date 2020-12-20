@@ -15,10 +15,11 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, computed} from 'vue';
 import {useRoute} from 'vue-router';
-import {testData, testPosts} from "@/testData";
 import PostList from "@/views/PostList.vue";
+import {useStore} from 'vuex';
+import {GlobalDataProps} from "@/store";
 export default defineComponent({
   name: "ColumnDetail",
   components: {
@@ -28,8 +29,14 @@ export default defineComponent({
     // useRoute获取路由信息
     const route = useRoute();
     const currentId = +route.params.id;
-    const column = testData.find(c => c.id === currentId);
-    const list = testPosts.filter(post => post.columnId === currentId);
+    // 从store中找当前的数据
+    const store = useStore<GlobalDataProps>();
+    const column = computed(() => {
+      return store.state.columns.find(c => c.id === currentId);
+    });
+    const list = computed(()=>{
+      return store.state.posts.filter(post => post.columnId === currentId);
+    })
     return {
       column,
       list

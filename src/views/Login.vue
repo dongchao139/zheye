@@ -34,6 +34,7 @@
 <script lang="ts">
 import {defineComponent,ref} from 'vue';
 import {useRouter} from 'vue-router'
+import {useStore} from 'vuex';
 import ValidateInput, {RulesProp} from "@/components/forms/ValidateInput.vue";
 import ValidateForm from "@/components/forms/ValidateForm.vue";
 
@@ -46,6 +47,7 @@ export default defineComponent({
   setup() {
     // useRouter路由跳转
     const router = useRouter();
+    const store = useStore();
     // const handleClick = function () {
     //   router.push({name: 'column', params: {id: 3}, query: {a: 1}})
     // };
@@ -59,7 +61,9 @@ export default defineComponent({
     // 提交时获取信息
     const onSubmitForm = (result: boolean) => {
       console.log(result);
-      router.push({name: 'column', params: {id: 3}, query: {a: 1}})
+      // router.push({name: 'column', params: {id: 3}, query: {a: 1}})
+      router.push("/")
+      store.commit('login');
     }
     return {
       // handleClick,
