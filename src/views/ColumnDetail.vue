@@ -31,12 +31,18 @@ export default defineComponent({
     const currentId = +route.params.id;
     // 从store中找当前的数据
     const store = useStore<GlobalDataProps>();
+    // const column = computed(() => {
+    //   return store.state.columns.find(c => c.id === currentId);
+    // });
+    // const list = computed(() => {
+    //   return store.state.posts.filter(post => post.columnId === currentId);
+    // })
     const column = computed(() => {
-      return store.state.columns.find(c => c.id === currentId);
+      return store.getters.getColumnById(currentId);
     });
-    const list = computed(()=>{
-      return store.state.posts.filter(post => post.columnId === currentId);
-    })
+    const list  = computed(() => {
+      return store.getters.getPostByCid(currentId);
+    });
     return {
       column,
       list
