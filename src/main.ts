@@ -4,6 +4,7 @@ import App from './App.vue'
 import Home from "./views/Home.vue";
 import Login from "@/views/Login.vue";
 import ColumnDetail from "./views/ColumnDetail.vue";
+import {createStore} from 'vuex';
 
 /**
  * SPA应用的优点
@@ -28,6 +29,34 @@ const router = createRouter({
  * 协议 + auth + host(hostname + port) + path(pathname + query) + hash
  * https://user:password@sub.example.com:8080/p/a/t/h?query=string#hash
  */
+
+/**
+ * 全局对象的弊端
+ * 1：数据不是响应式的
+ * 2：数据修改无法追踪
+ * 3：不符合组件开发的原则
+ *
+ * vuex redux
+ * 原则：
+ * 1：一个类似object的全局数据结构，称之为store
+ * 2：只能调用特殊的方法来实现数据修改
+ *
+ * vuex 的state都是响应式的
+ */
+const store = createStore({
+  state: {
+    count: 0
+  },
+  mutations: {
+    add: (state) => {
+      state.count++
+    }
+  }
+});
+console.log('store:',store.state.count);
+// 通过commit提交mutation，修改state
+store.commit('add');
+console.log('store:',store.state.count);
 
 const app = createApp(App);
 app.use(router);
