@@ -31,12 +31,6 @@ export default defineComponent({
     const currentId = +route.params.id;
     // 从store中找当前的数据
     const store = useStore<GlobalDataProps>();
-    // const column = computed(() => {
-    //   return store.state.columns.find(c => c.id === currentId);
-    // });
-    // const list = computed(() => {
-    //   return store.state.posts.filter(post => post.columnId === currentId);
-    // })
     const column = computed(() => {
       return store.getters.getColumnById(currentId);
     });
@@ -50,28 +44,6 @@ export default defineComponent({
   }
 });
 
-/**
- {
-  "path": "/column/1",
-  "name": "column",
-  "params": {
-    "id": "1"
-  },
-  "query": {
-    "search": "123"
-  },
-  "hash": "#foo",
-  "fullPath": "/column/1?search=123#foo",
-  "matched": [
-    {
-      "path": "/column/:id",
-      "name": "column",
-      "children": [],
-      ...
-    }
-  ],
-  "meta": {}
-}} */
 </script>
 
 <style scoped>
