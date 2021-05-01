@@ -1,7 +1,5 @@
 <template>
-  <h2>hello {{biggerColumnlen}}</h2>
-<!--  <router-link :to="{name: 'column', params: {id: 1}}">detail 1</router-link>&nbsp;-->
-<!--  <router-link :to="`/column/${2}`">detail 2</router-link>-->
+  <h2>hello {{biggerColumnLen}}</h2>
   <column-list :list="list"></column-list>
 </template>
 
@@ -20,10 +18,10 @@ export default defineComponent({
     const list = computed(() => {
       return store.state.columns;
     });
-    const biggerColumnlen = computed(() => store.getters.biggerColumnsLen);
+    const biggerColumnLen = computed(() => store.getters.biggerColumnsLen);
     return {
       list,
-      biggerColumnlen
+      biggerColumnLen
     }
   }
 })
