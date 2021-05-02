@@ -14,8 +14,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref,onMounted, onUnmounted,watch } from "vue";
-import useClickOutside from '../scripts/useClickOutside';
+import { defineComponent, watch, ref } from "vue";
+import useClickOutside,{useClickOutside1} from '@/scripts/useClickOutside';
 export default defineComponent({
   name: "Dropdown",
   props: {
@@ -39,6 +39,11 @@ export default defineComponent({
       }
       // onCleanUp(...)
     })
+    useClickOutside1(dropdownRef, (isClickedOutside: boolean) => {
+      if (isOpen.value && isClickedOutside) {
+        isOpen.value = false;
+      }
+    });
     return {
       isOpen,
       toggleOpen,
