@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--v-bind="$attrs" 将组件的attributes绑定到input中-->
     <input
       class="form-control"
       :value="inputRef.val"
@@ -18,8 +19,10 @@ import { defineComponent, reactive, PropType,onMounted,inject } from "vue";
 import {emitter} from './ValidateForm.vue';
 const emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 interface RuleProp {
-  type: "required" | "email";
+  type: "required" | "email" | "range";
   message: string;
+  min?: number,
+  max?: number
 }
 export type RulesProp = RuleProp[];
 export default defineComponent({
@@ -29,7 +32,6 @@ export default defineComponent({
   },
   // 禁用根元素继承attribute.
   inheritAttrs: false,
-  // 在模板中的input中添加v-bind="$attrs", 将组件的attributes绑定到input中
   setup(props, context) {
     const inputRef = reactive({
       val: props.modelValue || "",
@@ -52,6 +54,13 @@ export default defineComponent({
             passed = inputRef.val.trim() !== "";
           } else if (rule.type === "email") {
             passed = emailReg.test(inputRef.val);
+          } else if (rule.type === "range") {
+            if (rule.min) {
+              passed = inputRef.val.length >= rule.min;
+            }
+            if (rule.max) {
+              passed = inputRef.val.length <= rule.max;
+            }
           }
           if (!passed) {
             inputRef.message = rule.message;
