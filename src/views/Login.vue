@@ -59,10 +59,12 @@ export default defineComponent({
       {type: 'email', message:'email should be valid format'},
     ]
     // 提交时获取信息
-    const onSubmitForm = (result: boolean) => {
+    const onSubmitForm = (result: Array<any>) => {
       console.log(result);
       // router.push({name: 'column', params: {id: 3}, query: {a: 1}})
-      router.push("/")
+      if (result.every(r => r.valid)) {
+        router.push("/")
+      }
       store.commit('login');
     }
     return {

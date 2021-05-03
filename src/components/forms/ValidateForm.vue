@@ -13,7 +13,10 @@ import {defineComponent,onUnmounted,provide} from 'vue';
 import {v4 as uuidv4} from 'uuid';
 import mitt from 'mitt';
 export const emitter = mitt();
-type ValidateFunc = () => { valid: boolean; name: string; value: string };
+interface ValidateFunc {
+  (): { valid: boolean; name: string; value: string };
+  clearValue: () => void;
+}
 interface CallbackProps {
   formName: string;
   value: ValidateFunc;
@@ -42,6 +45,10 @@ export default defineComponent({
       const result: Array<any> = [];
       // 通过子组件的validate函数获取验证结果和输入的值
       funcArr.forEach(func => result.push(func()));
+      const allPassed = result.every(r => r.valid);
+      if (!allPassed) {
+        funcArr.forEach(func => func.clearValue());
+      }
       context.emit('form-submit', result);
     };
     return {
