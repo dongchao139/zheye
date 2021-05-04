@@ -45,9 +45,6 @@ export default defineComponent({
     // useRouter路由跳转
     const router = useRouter();
     const store = useStore();
-    // const handleClick = function () {
-    //   router.push({name: 'column', params: {id: 3}, query: {a: 1}})
-    // };
     // v-model绑定默认值
     const eRef = ref('donnchao@outlook.com');
     const formRef = ref();
