@@ -1,7 +1,5 @@
 <template>
-<!--  <h2>LOGIN</h2>-->
-<!--  <button @click="handleClick" class="btn btn-outline-dark">column 3</button>-->
-  <validate-form action="" @form-submit="onSubmitForm">
+  <validate-form action="" @form-submit="onSubmitForm" ref="formRef">
     <div class="mb-3">
       <label class="form-label" for="validateEmail">邮箱地址</label>
       <validate-input
@@ -11,8 +9,7 @@
           placeholder="清输入邮箱"
           :rules="emailRules"
           v-model="eRef"
-      >
-      </validate-input>
+      ></validate-input>
       {{eRef}}
     </div>
     <div class="mb-3">
@@ -53,6 +50,7 @@ export default defineComponent({
     // };
     // v-model绑定默认值
     const eRef = ref('donnchao@outlook.com');
+    const formRef = ref();
     // 指定验证规则
     const emailRules: RulesProp = [
       {type: 'required', message:'email can not be empty'},
@@ -64,12 +62,15 @@ export default defineComponent({
       // router.push({name: 'column', params: {id: 3}, query: {a: 1}})
       if (result.every(r => r.valid)) {
         router.push("/")
+      } else {
+        formRef.value.clearInputs();
       }
       store.commit('login');
     }
     return {
       // handleClick,
       eRef,
+      formRef,
       emailRules,
       onSubmitForm
     }

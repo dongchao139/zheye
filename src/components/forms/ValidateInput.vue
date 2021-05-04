@@ -73,7 +73,7 @@ export default defineComponent({
       }
       return {valid:true, name: context.attrs.name, value: inputRef.val};
     };
-    validateInput.clearValue = () => {
+    const clearValue = () => {
       inputRef.val = '';
     };
     // 使用全局的emitter对象, 在子组件中初始化时发布事件.
@@ -83,6 +83,7 @@ export default defineComponent({
       // 并通过provide->inject在子组件中获得此formName
       emitter.emit('form-item-created', {
         value: validateInput,
+        clear: clearValue,
         formName: inject('formName')
       });
     })
@@ -90,6 +91,7 @@ export default defineComponent({
       inputRef,
       validateInput,
       updateValue,
+      clearValue
     };
   },
 });
