@@ -17,7 +17,7 @@ export interface GlobalDataProps {
  * 2：数据修改无法追踪
  * 3：不符合组件开发的原则
  *
- * vuex redux
+ * vuex redux mobx
  * 原则：
  * 1：一个类似object的全局数据结构，称之为store
  * 2：只能调用特殊的方法来实现数据修改
@@ -31,9 +31,9 @@ const store = createStore<GlobalDataProps>({
     user: {isLogin: false}
   },
   mutations: {
-    // add: (state) => {
-    //   state.count++
-    // },
+    addPost(state, newPost) {
+      state.posts.push(newPost);
+    },
     login(state) {
       state.user = {...state.user, isLogin: true, name: 'viking'}
     }
@@ -45,7 +45,7 @@ const store = createStore<GlobalDataProps>({
     getColumnById: (state) => (id: number) => {
       return state.columns.find(c => c.id === id);
     },
-    getPostByCid: (state) => (cid: number) => {
+    getPostsByCid: (state) => (cid: number) => {
       return state.posts.filter(post => post.columnId === cid);
     }
   }

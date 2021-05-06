@@ -3,6 +3,7 @@ import {createRouter,createWebHistory} from 'vue-router'
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import ColumnDetail from "@/views/ColumnDetail.vue";
+import CreatePost from "@/views/CreatePost.vue";
 /**
  * SPA应用的优点
  * 1: 速度快,第一次下载完成静态文件, 跳转不需要再次下载
@@ -23,7 +24,8 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: Home },
     { path: '/login', name: 'login', component: Login },
-    { path: '/column/:id', name: 'column', component: ColumnDetail }
+    { path: '/column/:id', name: 'column', component: ColumnDetail },
+    { path: '/column/:id/post', name: 'post', component: CreatePost }
   ]
 });
 

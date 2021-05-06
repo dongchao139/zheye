@@ -32,7 +32,7 @@ export default defineComponent({
     const randomName = uuidv4();
     provide('formName', randomName);
     let funcArr: Set<ValidateFunc> = new Set<ValidateFunc>(); // 验证函数的数组
-    let clearFuncArr: Set<ClearInput> = new Set<ClearInput>();
+    const clearFuncArr: Set<ClearInput> = new Set<ClearInput>();
     // 使用全局的emitter对象, 在子组件中初始化时发布事件.
     // 在父组件中监听此事件, 在监听事件拿到子组件的validate函数
     const callback = (func?: CallbackProps) => {

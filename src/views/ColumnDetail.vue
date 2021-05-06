@@ -11,6 +11,10 @@
       </div>
     </div>
     <post-list :list="list"></post-list>
+    <router-link  :to="{name: 'post', params: {id: column.id}}"
+                  href="#" class="btn btn-outline-primary w-100">
+      添加文章
+    </router-link>
   </div>
 </template>
 
@@ -35,7 +39,7 @@ export default defineComponent({
       return store.getters.getColumnById(currentId);
     });
     const list  = computed(() => {
-      return store.getters.getPostByCid(currentId);
+      return store.getters.getPostsByCid(currentId);
     });
     return {
       column,

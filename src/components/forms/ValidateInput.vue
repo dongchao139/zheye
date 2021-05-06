@@ -2,12 +2,23 @@
   <div>
     <!--v-bind="$attrs" 将组件的attributes绑定到input中-->
     <input
+      v-if="type !== 'textarea'"
       class="form-control"
       :value="inputRef.val"
       @blur="validateInput"
       @input="updateValue"
       v-bind="$attrs"
       :class="{ 'is-valid': !inputRef.error,'is-invalid':inputRef.error }"
+    />
+    <textarea
+        v-if="type === 'textarea'"
+        class="form-control"
+        :style="{height: '300px'}"
+        :value="inputRef.val"
+        @blur="validateInput"
+        @input="updateValue"
+        v-bind="$attrs"
+        :class="{ 'is-valid': !inputRef.error,'is-invalid':inputRef.error }"
     />
     <span v-if="inputRef.error" class="invalid-feedback">
       {{inputRef.message}}
@@ -26,10 +37,15 @@ interface RuleProp {
   max?: number;
 }
 export type RulesProp = RuleProp[];
+export type RulesProps = 'input' | 'textarea'
 export default defineComponent({
   props: {
     rules: Array as PropType<RulesProp>,
-    modelValue: String
+    modelValue: String,
+    type: {
+      type: String as PropType<string>,
+      default: 'input'
+    }
   },
   // 禁用根元素继承attribute.
   inheritAttrs: false,
