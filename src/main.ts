@@ -6,8 +6,17 @@ import store from "@/store";
 
 axios.defaults.baseURL = 'http://apis.imooc.com/api';
 axios.interceptors.request.use(config => {
-    config.params = {...config.params, icode: '15AC610A894E4801'};
-    return config;
+    // get 请求，添加到 url 中
+    config.params = { ...config.params, icode: '15AC610A894E4801' }
+    // 其他请求，添加到 body 中
+    // 如果是上传文件，添加到 FormData 中
+    if (config.data instanceof FormData) {
+        config.data.append('icode', '15AC610A894E4801')
+    } else {
+        // 普通的 body 对象，添加到 data 中
+        config.data = { ...config.data, icode: '15AC610A894E4801' }
+    }
+    return config
 })
 axios.get('/columns').then(res => {
     console.log(res.data);
