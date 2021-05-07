@@ -24,9 +24,9 @@ const router = createRouter({
   history: routerHistory,
   routes: [
     { path: '/', name: 'home', component: Home },
-    { path: '/login', name: 'login', component: Login },
+    { path: '/login', name: 'login', component: Login, meta: { redirectAlreadyLogin: true } },
     { path: '/column/:id', name: 'column', component: ColumnDetail },
-    { path: '/column/:id/post', name: 'post', component: CreatePost }
+    { path: '/column/:id/post', name: 'post', component: CreatePost, meta: { requiredLogin: true } }
   ]
 });
 
@@ -34,8 +34,10 @@ const router = createRouter({
  * 添加路由守卫
  */
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !store.state.user.isLogin) {
+  if (to.meta.requiredLogin && !store.state.user.isLogin) {
     next('/login');
+  } else if (to.meta.redirectAlreadyLogin && store.state.user.isLogin) {
+    next('/');
   } else {
     next(true);
   }
