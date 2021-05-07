@@ -36,6 +36,9 @@ const store = createStore<GlobalDataProps>({
     },
     login(state) {
       state.user = {...state.user, isLogin: true, name: 'viking'}
+    },
+    logout(state) {
+      state.user = {isLogin: false}
     }
   },
   getters: {

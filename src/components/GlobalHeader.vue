@@ -5,17 +5,17 @@
       <li class="list-inline-item">
         <router-link to="/login" href="#" class="btn btn-outline-light my-2">
           登陆
-        </router-link >
+        </router-link>
       </li>
-     <li class="list-inline-item">
-       <router-link to="/login" href="#" class="btn btn-outline-light my-2">
-         注册
-       </router-link >
-     </li>
+      <li class="list-inline-item">
+        <router-link to="/login" href="#" class="btn btn-outline-light my-2">
+          注册
+        </router-link>
+      </li>
     </ul>
     <ul v-else class="list-inline mb-0">
       <li class="list-inline-item">
-				<dropdown :title="`你好 ${user.name}`">
+        <dropdown :title="`你好 ${user.name}`">
           <dropdown-item>
             <a href="#" class="dropdown-item">新建文章</a>
           </dropdown-item>
@@ -23,30 +23,44 @@
             <a href="#" class="dropdown-item">编辑资料</a>
           </dropdown-item>
           <dropdown-item>
-            <a href="#" class="dropdown-item">退出登录</a>
+            <a href="#" @click="handleLogout" class="dropdown-item">退出登录</a>
           </dropdown-item>
         </dropdown>
-			</li>
+      </li>
     </ul>
   </nav>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import {defineComponent, PropType} from "vue";
+import {useRouter} from 'vue-router';
 import Dropdown from './Dropdown.vue';
 import DropdownItem from "./DropdownItem.vue";
+import store from "@/store";
+
 export interface UserProps {
   isLogin: boolean;
   name?: string;
   id?: number;
 }
+
 export default defineComponent({
-	name: "GlobalHeader",
-	components:{Dropdown,DropdownItem},
+  name: "GlobalHeader",
+  components: {Dropdown, DropdownItem},
   props: {
     user: {
       type: Object as PropType<UserProps>,
       required: true,
     },
   },
+  setup() {
+    const router = useRouter();
+    const handleLogout = function () {
+      store.commit('logout');
+      router.push('/login');
+    }
+    return {
+      handleLogout
+    }
+  }
 });
 </script>

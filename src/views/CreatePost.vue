@@ -46,7 +46,6 @@ export default defineComponent({
     const contentRules: RulesProp = [{type:"required",message: "内容不能为空"}];
     const onFormSubmit = function (result: Array<any>) {
       const newPost = {id: Math.random(), title: result[0].value, content: result[1].value, createdAt: new Date(), columnId: columnId};
-      console.log(newPost);
       store.commit('addPost', newPost);
       router.push({name: 'column', params: {id: columnId}});
     }
